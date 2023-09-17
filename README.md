@@ -27,4 +27,8 @@ cd frontend
 npm run dev
 ```
 
-4. Navigate to `localhost:3000` to view the application.
+4. Run the Streamlit clustering web app. 
+
+```
+streamlit run clusters.py
+```
