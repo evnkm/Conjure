@@ -10,7 +10,7 @@ p = pathlib.Path("/root/foo/bar.txt")
 
 
 llava_image = Image.debian_slim(python_version="3.10").run_commands(
-    "git clone https://github.com/haotian-liu/LLaVA.git",
+    "git clone https://github.com/evnkm/LLaVA.git",
     "cd LLaVA",
     "conda create -n llava python=3.10 -y",
     "conda activate llava",
