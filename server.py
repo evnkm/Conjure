@@ -2,6 +2,7 @@ from flask import Flask, request
 import json
 
 from querydb import query
+from answering import qna 
 
 
 def llava(imagename, prompt): 
@@ -20,10 +21,11 @@ def filter_images():
     return json.dumps({'images': [name[9:] for name in query(q, 10)]}) # List of filenames of images.
 
 @app.route('/qna', methods=["POST"])
-def qna(): 
+def rest_qna(): 
     data = json.loads(request.data)
+    print(data)
     imagename, prompt = data["filename"], data["prompt"]
-    return json.dumps({'response': llava(imagename, prompt)}) # String - the response to prompt from the VLM
+    return json.dumps({'response': qna(imagename, prompt)}) # String - the response to prompt from the VLM
 
 if __name__ == "__main__": 
     app.run()
