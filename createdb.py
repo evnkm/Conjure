@@ -8,11 +8,9 @@ from langchain.embeddings import HuggingFaceEmbeddings
 import chromadb
 
 # path = "/path/to/image-to-description/dataframe"
-path = "./demo-dataset/df.csv"
+path = "./demo-dataset.csv"
 
 df = pd.read_csv(path)
-
-# docs = []
 
 documents = []
 metadatas = []
@@ -24,8 +22,6 @@ for index, row in df.iterrows():
         "id": row["id"], 
         "filename": row["filename"]
     }
-    # doc = Document(page_content=text, metadata=metadata)
-    # docs.append(doc)
 
     documents.append(text)
     metadatas.append(metadata)
@@ -49,16 +45,5 @@ df["embeddings"] = vectors
 print(df)
 df.to_csv(path)
 
-# db = Chroma.from_documents(docs, embedding_function)
-
-# db2 = Chroma(persist_directory="./", embedding_function=embedding_function)
-
-# with open("embeddings.pkl", "wb") as f: 
-#     pickle.dump(db, f)
-
-# query = "Show me images of an office."
-# docs = db.similarity_search(query, 1)
-
-# print(docs)
 
 
