@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import dataset from "/Users/alexanderzhang/Documents/conjure/demo_dataset.json";
+import "./styles.css";
 
 export default function Client({ imageFiles }) {
   const [input, setInput] = useState("");
@@ -75,6 +77,7 @@ export default function Client({ imageFiles }) {
               className={`relative group aspect-square block w-full overflow-hidden ${
                 selectedImage === file && "ring-2 ring-green-500"
               } rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100`}
+              style={{ fontSize: "16px", color: "blue" }}
             >
               <Image
                 src={`/images/${file}`}
@@ -82,6 +85,9 @@ export default function Client({ imageFiles }) {
                 layout="fill"
                 className="pointer-events-none object-cover object-center group-hover:opacity-75"
               />
+              <div className="image-caption">
+                <p>{dataset["./images/" + file]}</p>
+              </div>
             </div>
             <p className="pointer-events-none mt-2 block truncate text-sm font-medium text-gray-900">
               {file.name}
@@ -94,7 +100,16 @@ export default function Client({ imageFiles }) {
       </ul>
       <div className="w-[25%] bg-blue-100 text-black h-full flex flex-col justify-between min-h-screen fixed top-0 right-0 p-4 border-l border-neutral-300">
         <div>
-          <h2 style={{ fontSize: "2rem", fontFamily: "inherit", paddingBottom: "10px", color: "black" }}>Ask Stanley</h2>
+          <h2
+            style={{
+              fontSize: "2rem",
+              fontFamily: "inherit",
+              paddingBottom: "10px",
+              color: "black",
+            }}
+          >
+            Ask Stanley
+          </h2>
         </div>
         <div className="w-full h-full flex flex-col gap-2 overflow-auto pb-4">
           {chat?.map((c, key) => (

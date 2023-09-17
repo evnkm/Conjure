@@ -9,13 +9,20 @@ model_store_path = "/root/models"
 p = pathlib.Path("/root/foo/bar.txt")
 
 
-llava_image = Image.debian_slim(python_version="3.10").run_commands(
+llava_image = Image.debian_slim(python_version="3.9").run_commands(
+    "which python",
+    "apt install -y git",
+    "pip install auxlib",
+    "pip install conda==4.2.7",
     "git clone https://github.com/evnkm/LLaVA.git",
     "cd LLaVA",
-    "conda create -n llava python=3.10 -y",
-    "conda activate llava",
+    "pip install cytoolz",
+    "pip install ruamel_yaml",
+    # "conda create -n llava python=3.9 -y",
+    # "conda activate llava",
     "pip install --upgrade pip",
-    "pip install -e .",
+    "pip install .",
+
 )
 
 
@@ -25,12 +32,14 @@ async def generate_text_from_llava(img_path: str, prompt: str):
     Input image path and prompt, output text caption of image
     '''
 
+
 @stub.function(volumes={"/root/foo": stub.volume})
 def f():
     p.write_text("hello")
     print(f"Created {p=}")
     stub.volume.commit()  # Persist changes
     print(f"Committed {p=}")
+
 
 @stub.function(volumes={"/root/foo": stub.volume})
 def g(reload: bool = False):
@@ -40,6 +49,7 @@ def g(reload: bool = False):
         print(f"{p=} contains '{p.read_text()}'")
     else:
         print(f"{p=} does not exist!")
+
 
 @stub.local_entrypoint()
 def main():
