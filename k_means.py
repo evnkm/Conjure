@@ -3,13 +3,17 @@ from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 
 # Load the DataFrame
-df = pd.read_csv("df.csv")
+path = "./demo-dataset_600.csv"
+df = pd.read_csv(path)
 
 # Get the document vectors
-document_vectors = df["embeddings"]
+document_vectors = [list(emb) for emb in df["embeddings"]]
+
+for vec in document_vectors: 
+    print(len(vec))
 
 # Define a range of cluster sizes
-cluster_sizes = range(2, 10)
+cluster_sizes = range(5, 20)
 
 # Calculate the silhouette score for each cluster size
 silhouette_scores = []
@@ -34,3 +38,5 @@ df["image_cluster"] = df["cluster_label"].apply(lambda cluster_label: f"Cluster 
 
 # Print the DataFrame
 print(df)
+
+df.to_csv(path)

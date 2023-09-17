@@ -5,7 +5,7 @@ client = chromadb.PersistentClient(path="./db")
 
 embedding_function = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
-collection = client.get_collection(name="demo-dataset", embedding_function=embedding_function.embed_documents)
+collection = client.get_collection(name="demo-dataset-600", embedding_function=embedding_function.embed_documents)
 
 def query(prompt, n=10): 
     vectors = embedding_function.embed_documents([prompt])

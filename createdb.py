@@ -8,7 +8,7 @@ from langchain.embeddings import HuggingFaceEmbeddings
 import chromadb
 
 # path = "/path/to/image-to-description/dataframe"
-path = "./demo-dataset.csv"
+path = "./demo-dataset_600.csv"
 
 df = pd.read_csv(path)
 
@@ -33,7 +33,7 @@ embedding_function = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
 client = chromadb.PersistentClient(path="./db")
 
-collection = client.create_collection(name="demo-dataset", embedding_function=embedding_function.embed_documents)
+collection = client.create_collection(name="demo-dataset-600", embedding_function=embedding_function.embed_documents)
 collection.add(
     documents=documents, 
     metadatas=metadatas, 
