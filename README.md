@@ -1,5 +1,11 @@
 # conjure
 
+Conjure allows users to upload a dataset of images, or their entire camera roll, that we can then filter through using natural-language prompts, such as, "locate images of nature" or “pull up my pictures from pride parade 2023.” Users can also opt for a categorization of their data and automatic classification into automatic labels. Functionality to ask questions about a specific image, like, "What is the boy in this image wearing?" is also built in.
+
+## Demo
+
+https://youtu.be/aONAhdpodrU
+
 ## Requirements 
 
 ```
@@ -32,3 +38,6 @@ npm run dev
 ```
 streamlit run clusters.py
 ```
+
+5. Open http://localhost:3000/ in your browser.
+
